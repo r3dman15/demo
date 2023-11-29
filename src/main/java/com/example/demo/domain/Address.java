@@ -12,7 +12,7 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer address_id;
+    private Integer id;
 
     private String street;
 
