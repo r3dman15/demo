@@ -12,7 +12,7 @@ public class Author {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer author_id;
+    private Integer id;
 
     private String name;
 }

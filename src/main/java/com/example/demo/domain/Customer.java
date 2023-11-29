@@ -12,7 +12,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer customer_id;
+    private Integer id;
 
     private String name;
 

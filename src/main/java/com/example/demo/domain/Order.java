@@ -14,7 +14,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer order_id;
+    private Integer id;
 
     private Integer customer_id;
 
