@@ -14,11 +14,21 @@ public class Customer {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-    private String name;
+    private String firstName;
+
+    private String lastName;
 
     private String email;
 
     private String password;
 
     private Integer address_id;
+
+
+    @Data
+    public static class Request {
+        private Customer customer;
+        private Address address;
+    }
+
 }

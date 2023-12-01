@@ -83,6 +83,14 @@ public class BookstoreController {
     public @ResponseBody Customer addNewCustomer(@RequestBody Customer customer) {
         return customerRepository.save(customer);
     }
+    @PostMapping(path = "/customer-with-address", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Customer addCustomerWithAddress(@RequestBody Customer.Request request) {
+        System.out.println(request);
+        Integer addressId = addNewAddress(request.getAddress()).getId();
+        Customer customer = request.getCustomer();
+        customer.setAddress_id(addressId);
+        return customerRepository.save(customer);
+    }
 
     @GetMapping(path = "/customer")
     public @ResponseBody Iterable<Customer> getAllCustomer() {
