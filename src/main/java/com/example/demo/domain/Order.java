@@ -1,12 +1,10 @@
 package com.example.demo.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 @Data
@@ -14,12 +12,16 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
+    private Integer order_id;
 
-    private Integer customer_id;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
-    private Date order_date;
+    private Date date;
 
-    private Double total_price;
+    @ManyToMany
+    @JoinColumn(name = "book_id")
+    private Set<Book> books;
 
 }

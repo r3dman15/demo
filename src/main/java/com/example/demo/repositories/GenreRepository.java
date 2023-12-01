@@ -9,5 +9,5 @@ import org.springframework.data.repository.CrudRepository;
 // CRUD refers Create, Read, Update, Delete
 
 public interface GenreRepository extends CrudRepository<Genre, Integer> {
-
+    Genre findByName(String name);
 }

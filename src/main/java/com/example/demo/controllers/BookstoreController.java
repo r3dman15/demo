@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @CrossOrigin
 @Controller
 @RequestMapping("bookstore")
@@ -26,8 +28,6 @@ public class BookstoreController {
     private CustomerRepository customerRepository;
     @Autowired
     private OrderRepository orderRepository;
-    @Autowired
-    private OrderDetailRepository orderDetailRepository;
 
 
     @PostMapping(path = "/genre", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -69,13 +69,24 @@ public class BookstoreController {
     // Book
     @PostMapping(path = "/book", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Book addNewBook(@RequestBody Book book) {
+
         return bookRepository.save(book);
+    }
+
+    @GetMapping(path = "/book/")
+    public @ResponseBody Iterable<Book> getAllBook(@RequestParam String genre_name)
+    {
+        Genre genre = genreRepository.findByName(genre_name.toUpperCase() );
+        return bookRepository.findByGenre(genre);
     }
 
     @GetMapping(path = "/book")
     public @ResponseBody Iterable<Book> getAllBook() {
         return bookRepository.findAll();
     }
+
+
+
 
     // Customer
 
@@ -86,9 +97,9 @@ public class BookstoreController {
     @PostMapping(path = "/customer-with-address", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Customer addCustomerWithAddress(@RequestBody Customer.Request request) {
         System.out.println(request);
-        Integer addressId = addNewAddress(request.getAddress()).getId();
+        Address address = addNewAddress(request.getAddress());
         Customer customer = request.getCustomer();
-        customer.setAddress_id(addressId);
+        customer.setAddress(address);
         return customerRepository.save(customer);
     }
 
@@ -106,18 +117,6 @@ public class BookstoreController {
     @GetMapping(path = "/order")
     public @ResponseBody Iterable<Order> getAllOrder() {
         return orderRepository.findAll();
-    }
-
-    // OrderDetail
-
-    @PostMapping(path = "/orderdetail", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody OrderDetail addNewOrderDetail(@RequestBody OrderDetail orderDetail) {
-        return orderDetailRepository.save(orderDetail);
-    }
-
-    @GetMapping(path = "/orderdetail")
-    public @ResponseBody Iterable<OrderDetail> getAllOrderDetail() {
-        return orderDetailRepository.findAll();
     }
 
 

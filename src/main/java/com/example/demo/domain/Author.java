@@ -12,7 +12,9 @@ public class Author {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
+    private Integer author_id;
 
-    private String name;
+    private String firstName;
+
+    private String lastName;
 }

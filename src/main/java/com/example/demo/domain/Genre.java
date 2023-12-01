@@ -11,7 +11,7 @@ import lombok.Data;
 public class Genre {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+    private Integer genre_id;
 
     String name;
 

@@ -1,9 +1,6 @@
 package com.example.demo.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -12,7 +9,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
+    private Integer customer_id;
 
     private String firstName;
 
@@ -22,7 +19,9 @@ public class Customer {
 
     private String password;
 
-    private Integer address_id;
+    @ManyToOne
+    @JoinColumn(name="address_id")
+    private Address address;
 
 
     @Data
