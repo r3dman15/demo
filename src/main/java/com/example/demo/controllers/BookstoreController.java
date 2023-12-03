@@ -8,9 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
-
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8080, http://localhost:3000")
 @Controller
 @RequestMapping("bookstore")
 // This means that this class is a Controller
@@ -106,6 +104,7 @@ public class BookstoreController {
     public @ResponseBody Iterable<Customer> getAllCustomer() {
         return customerRepository.findAll();
     }
+    @CrossOrigin(origins = "http://localhost:8080, http://localhost:3000")
     @GetMapping(path = "/customer/findByEmail")
     public @ResponseBody Iterable<Customer>  getAllCustomer(@RequestParam String email) {
         return customerRepository.findByEmail(email);
