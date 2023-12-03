@@ -96,7 +96,6 @@ public class BookstoreController {
     }
     @PostMapping(path = "/customer-with-address", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Customer addCustomerWithAddress(@RequestBody Customer.Request request) {
-        System.out.println(request);
         Address address = addNewAddress(request.getAddress());
         Customer customer = request.getCustomer();
         customer.setAddress(address);
@@ -106,6 +105,10 @@ public class BookstoreController {
     @GetMapping(path = "/customer")
     public @ResponseBody Iterable<Customer> getAllCustomer() {
         return customerRepository.findAll();
+    }
+    @GetMapping(path = "/customer/findByEmail")
+    public @ResponseBody Iterable<Customer>  getAllCustomer(@RequestParam String email) {
+        return customerRepository.findByEmail(email);
     }
 
     // Order
